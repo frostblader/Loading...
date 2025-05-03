@@ -24,14 +24,13 @@
         fetch("./data.txt")
     .then(response => response.text())
     .then(text => {
-        lines = text.split(/\r?\n/).filter(line => line.trim() !== ""); // Removes blank lines
+        lines = text.split(/\r?\n/).map(line => line.trim()).filter(line => line !== ""); // Trim and remove blank lines
         currentLine = 0;
         displayLine();
         startTimer();
     })
     .catch(error => console.error("Error loading file:", error));
 
-            .catch(error => console.error("Error loading file:", error));
 
        function displayLine() {
     // Ensure currentLine points to a valid non-empty line
