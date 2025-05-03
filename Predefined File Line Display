@@ -24,11 +24,13 @@
     <button id="nextBtn">Next</button>
 
     <script>
+        
         let lines = [];
         let currentLine = 0;
 
+        
         // Fetch a predefined file from a URL
-        fetch("https://example.com/sample.txt") // Replace with actual file URL
+        fetch("./data.txt") // File stored in the repo root
             .then(response => response.text())
             .then(text => {
                 lines = text.split(/\r?\n/);
