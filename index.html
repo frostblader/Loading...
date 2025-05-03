@@ -33,10 +33,19 @@
 
 
        function displayLine() {
-    // Ensure currentLine points to a valid non-empty line
-    while (currentLine < lines.length && lines[currentLine].trim() === "") {
-        currentLine++; // Skip empty lines
+    if (lines.length > 0) {
+        // Check if the current line contains "jaamees baaxteer" BEFORE displaying it
+        if (lines[currentLine].includes("jaamees baaxteer")) {
+            currentLine = 0; // Loop back to the beginning instantly
+        }
+
+        document.getElementById("container").textContent = lines[currentLine];
+
+        // Move to the next line, unless looping occurred
+        currentLine = (currentLine + 1) % lines.length;
     }
+}
+
 
     // Display the current line
     document.getElementById("container").textContent = lines[currentLine];
