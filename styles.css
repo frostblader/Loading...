@@ -1,5 +1,7 @@
 p {
-font-family: Papyrus, fantasy;
+font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 color: DimGrey;
 }
 body {
