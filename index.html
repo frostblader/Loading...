@@ -31,18 +31,23 @@
             })
             .catch(error => console.error("Error loading file:", error));
 
-        function displayLine() {
-            if (lines.length > 0) {
-                document.getElementById("container").textContent = lines[currentLine];
+       function displayLine() {
+    // Ensure currentLine points to a valid non-empty line
+    while (currentLine < lines.length && lines[currentLine].trim() === "") {
+        currentLine++; // Skip empty lines
+    }
 
-                // If "jaamees baaxteer" is found, restart from the first line
-                if (lines[currentLine].includes("jaamees baaxteer")) {
-                    currentLine = 0;
-                } else {
-                    currentLine = (currentLine + 1) % lines.length;
-                }
-            }
-        }
+    // Display the current line
+    document.getElementById("container").textContent = lines[currentLine];
+
+    // Check if "jaamees baaxteer" is found and restart if needed
+    if (lines[currentLine].includes("jaamees baaxteer")) {
+        currentLine = 0;
+    } else {
+        currentLine = (currentLine + 1) % lines.length;
+    }
+}
+
 
         function startTimer() {
             setInterval(displayLine, 2000); // Change line every 2 seconds
