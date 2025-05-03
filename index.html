@@ -25,6 +25,7 @@
             .then(response => response.text())
             .then(text => {
                 lines = text.split(/\r?\n/).map(line => line.trim()).filter(line => line !== ""); // Trim and remove blank lines
+                console.log(lines); // Debugging: See all lines in the console
                 currentLine = 0;
                 displayLine();
                 startTimer();
@@ -33,9 +34,9 @@
 
         function displayLine() {
             if (lines.length > 0) {
-                // If "jaamees baaxteer" is found, restart WITHOUT displaying it
+                // Skip "jaamees baaxteer" BEFORE displaying it
                 if (lines[currentLine].includes("jaamees baaxteer")) {
-                    currentLine = 0; // Loop back to the beginning instantly
+                    currentLine = 0; // Loop back instantly, skipping the display
                 } else {
                     document.getElementById("container").textContent = lines[currentLine];
                     currentLine++; // Move to the next line
@@ -55,3 +56,4 @@
 
 </body>
 </html>
+
