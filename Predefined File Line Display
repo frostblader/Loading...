@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predefined File Line Display</title>
+    <style>
+        #container {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">Loading...</div>
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+
+    <script>
+        let lines = [];
+        let currentLine = 0;
+
+        // Fetch a predefined file from a URL
+        fetch("https://example.com/sample.txt") // Replace with actual file URL
+            .then(response => response.text())
+            .then(text => {
+                lines = text.split(/\r?\n/);
+                currentLine = 0;
+                displayLine();
+            })
+            .catch(error => console.error("Error loading file:", error));
+
+        function displayLine() {
+            if (lines.length > 0) {
+                document.getElementById("container").textContent = lines[currentLine];
+            }
+        }
+
+        document.getElementById("nextBtn").addEventListener("click", function() {
+            if (currentLine < lines.length - 1) {
+                currentLine++;
+                displayLine();
+            }
+        });
+
+        document.getElementById("prevBtn").addEventListener("click", function() {
+            if (currentLine > 0) {
+                currentLine--;
+                displayLine();
+            }
+        });
+    </script>
+
+</body>
+</html>
