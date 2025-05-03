@@ -24,8 +24,8 @@
         fetch("./data.txt")
             .then(response => response.text())
             .then(text => {
-                lines = text.split(/\r?\n/).map(line => line.trim()).filter(line => line !== ""); // Trim and remove blank lines
-                console.log(lines); // Debugging: See all lines in the console
+                lines = text.split(/\r?\n/).map(line => line.trim()).filter(line => line !== ""); // Clean up blank lines
+                console.log("Loaded lines:", lines); // Debugging output
                 currentLine = 0;
                 displayLine();
                 startTimer();
@@ -34,15 +34,18 @@
 
         function displayLine() {
             if (lines.length > 0) {
-                // Skip "jaamees baaxteer" BEFORE displaying it
+                // Skip "jaamees baaxteer" BEFORE displaying anything
                 if (lines[currentLine].includes("jaamees baaxteer")) {
-                    currentLine = 0; // Loop back instantly, skipping the display
-                } else {
-                    document.getElementById("container").textContent = lines[currentLine];
-                    currentLine++; // Move to the next line
+                    currentLine = 0; // Restart instantly
                 }
 
-                // Ensure we don't exceed bounds
+                // Display current line
+                document.getElementById("container").textContent = lines[currentLine];
+
+                // Move to next line properly
+                currentLine++;
+
+                // Prevent holding the last visible line too long
                 if (currentLine >= lines.length) {
                     currentLine = 0; // Restart when reaching the end
                 }
@@ -50,10 +53,9 @@
         }
 
         function startTimer() {
-            setInterval(displayLine, 2000); // Change line every 2 seconds
+            setInterval(displayLine, 2000); // Ensure consistent timing across all lines
         }
     </script>
 
 </body>
 </html>
-
