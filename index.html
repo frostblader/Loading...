@@ -33,12 +33,17 @@
 
         function displayLine() {
             if (lines.length > 0) {
-                // If the current line contains "jaamees baaxteer", reset without displaying it
+                // If "jaamees baaxteer" is found, restart WITHOUT displaying it
                 if (lines[currentLine].includes("jaamees baaxteer")) {
                     currentLine = 0; // Loop back to the beginning instantly
                 } else {
                     document.getElementById("container").textContent = lines[currentLine];
-                    currentLine = (currentLine + 1) % lines.length; // Move to the next line
+                    currentLine++; // Move to the next line
+                }
+
+                // Ensure we don't exceed bounds
+                if (currentLine >= lines.length) {
+                    currentLine = 0; // Restart when reaching the end
                 }
             }
         }
