@@ -22,13 +22,15 @@
 
         // Fetch the text file
         fetch("./data.txt")
-            .then(response => response.text())
-            .then(text => {
-                lines = text.split(/\r?\n/);
-                currentLine = 0;
-                displayLine();
-                startTimer();
-            })
+    .then(response => response.text())
+    .then(text => {
+        lines = text.split(/\r?\n/).filter(line => line.trim() !== ""); // Removes blank lines
+        currentLine = 0;
+        displayLine();
+        startTimer();
+    })
+    .catch(error => console.error("Error loading file:", error));
+
             .catch(error => console.error("Error loading file:", error));
 
        function displayLine() {
